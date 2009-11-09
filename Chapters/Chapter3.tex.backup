@@ -1,0 +1,67 @@
+\chapter{Matematyczne podstawy}
+\label{Rozdzial3}
+\lhead{Rozdzia³ 3. \emph{Teoretyczny opis rozwi¹zania problemu}}
+
+Poni¿ej zostanie przedstawiona metodologia badañ wykorzystana podczas projektowania systemu lokalizacji dŸwiêku. 
+
+
+\rdm{Opis metody, za pomoc¹ której rozwi¹zano problem w pracy. Powinna to byæ prezentacja metody nie nawi¹zuj¹ca do jej implementacji. Istotne jest wyjaœnienie podstaw matematycznych i/lub fizycznych dzia³ania metody.
+Przedstawienie algorytmu jako ca³oœci, zdefiniowanie modu³ów i powiÄ…zaÅ„ miÄ™dzy moduÅ‚ami. Do modelowania struktury systemu (realizuj¹cego metod¹) proszê stosowaæ schematy (np. diagramy  UML).
+proszê wyjaÅ›niÄ‡ nowe pojêcia wykorzystywane w opisie metody.}
+
+\section{Ogólny opis metody}
+
+Najbardziej popularne metoda lokalizacji Ÿród³a dŸwiêku opiera siê o wykorzystanie pary mikrofonów. Ju¿ przy tak ma³ej iloœci mo¿na okreœliæ ró¿nicê czasu w dotarciu dŸwiêku do ka¿dego z mikrofonów. Taka technika wykorzystana jako etap lokalizacji Ÿród³a dŸwiêku jest to znana jako TDoA. Taki pomiar umo¿liwia wyznaczenie po³o¿enia Ÿród³a dŸwiêku na ramionach hiperboli, jeœli rozpatrujemy obszar badania jako p³aszczyznê. W przestrzeni natomiast wynik TDoA umo¿liwia nam wyznaczenie hiperboloidy. 
+
+Najzwyklejsz¹ metod¹ obliczenia TDoA jest ta znana pod skrótem GCC. Nale¿y rozwa¿yæ dwa mikrofony oddalone od siebie o odleg³oœæ $d$ . W zasiêgu pracy mikrofonów znajduje siê pojedyncze Ÿród³o dŸwiêku. Ka¿dy z mikrofonów otrzymuje sygna³, odpowiednio $m_1(t)$   oraz  $m_2(t)$ .
+
+Obydwa sygna³y s¹ idealnie przeskalowanymi i opóŸnionymi w czasie wersjami wzglêdem siebie. Jednak¿e w praktyce sygna³ mikrofonowy bêdzie zak³ócony poprzez zewnêtrzny szum, pog³osy oraz szum samego mikrofonu. Oznacza to, ¿e sygna³ mikrofonowy mo¿na zapisaæ wzorami dla ka¿dego z sensorów jak nastêpuje
+
+\begin{equation}
+\label{eq:4}
+    m_1(t) = s(t) + n_1(t),
+\end{equation}
+
+\begin{equation}
+\label{eq:5}
+    m_2(t) = s(t+\tau) + n_2(t),
+\end{equation}
+
+gdzie $s(t)$ oraz $s(t+\tau)$ s¹ sygna³ami otrzymanymi od Ÿród³a dŸwiêku, a $n_{1}(t)$ oraz $n_{2}(t)$ to wszystkie szumy zebrane wraz z sygna³em poprzez mikrofony. TDoA, który nale¿y obliczyæ to $\tau$. W zwi¹zku z doœæ ma³¹ ró¿nic¹ odleg³oœci mikrofonów od siebie - t³umienie dŸwiêku mo¿na pomin¹æ dla celów uproszczenia wyprowadzeñ matematycznych. Dodatkowo to uproszczenie nie wp³ywa na wynik, poniewa¿, jak zostanie to przybli¿one poni¿ej, amplituda ka¿dego z sygna³ów nie gra istotnej roli w wybranych algorytmach. 
+
+Opiszmy transformatê Fouriera otrzymanych sygna³ów jako odpowiednio $M_{1}(\omega)$ oraz  $M_{2}(\omega)$. Oszacowanie $\tau$ mo¿e byæ obliczone za pomoc¹ korelacji w dziedzinie czêstotliwoœci poprzez znalezienie opóŸnienia (przesuniêcia fazowego), które zwiêksza wynik korelacji pomiêdzy sygna³ami $m_{1}$ a $m_{2}$, co mo¿na zobrazowaæ poni¿szym wzorem
+
+\begin{equation}
+\label{eq:6}
+	\displaystyle\tilde{\tau} = \arg \max_\beta \int^\infty_{\omega=-\infty} M_1(\omega) \overline { M_2(\omega) } e^{-j\omega\beta} d\omega .
+\end{equation}
+
+T³umacz¹c ten wzór jak najproœciej mo¿na stwierdziæ, ¿e TDoA polega na poszukiwaniu takiego $\beta$ dla którego wynik korelacji jest najwiêkszy. 
+
+Ogólna korelacja lub innymi s³owy niefiltrowana korelacja (GCC), okreœlona wzorem \eqref{eq:6} jest metod¹ czu³¹ na zak³ócenia i pog³os.\citep{Reference2} 
+
+Aby uskuteczniæ dzia³anie korelacji w bardziej zaszumionym otoczeniu wprowadzono czynnik równowa¿¹cy  $ W(\omega) $ . Jego zastosowanie we wzorze  \eqref{eq:6}  wygl¹da nastêpuj¹co
+
+\begin{equation}
+\label{eq:7}
+	\displaystyle\tilde{\tau} = \arg \max_\beta \int^\infty_{\omega=-\infty} W(\omega) M_1(\omega) \overline { M_2(\omega) } e^{-j\omega\beta} d\omega .
+\end{equation}
+
+gdzie niektóre z mo¿liwych wartoœci równowa¿¹cych s¹ podane wzorami
+
+\begin{equation}
+	\label{eq:8}
+	\begin{array}{l}
+		W_{GCC}(\omega) = 1, \\
+	
+		W_{ML}(\omega) = \displaystyle\frac{\mid M
+_1(\omega)\mid \mid M_2(\omega)\mid}{\mid N_1(\omega)\mid^2 \mid M_2(\omega)\mid^2 + \mid N_2(\omega)\mid^2 \mid M_1(\omega)\mid^2 }, \\
+	
+		W_{PHAT}(\omega) = \displaystyle\frac{1}{\mid M_1(\omega)\mid\mid M_2(\omega)\mid}
+	
+	\end{array}
+\end{equation}
+
+odpowiednio dla korelacji w wersji podstawowej (GCC), algorytmu ML oraz PHAT.
+
+

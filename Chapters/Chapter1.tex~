@@ -1,0 +1,59 @@
+% Chapter 1
+
+\chapter{Wstêp} % Write in your own chapter title
+\label{Rozdzial1}
+\lhead{Rozdzia³ 1. \emph{Wstêp}} % Write in your own chapter title to set the page header
+
+
+\section{Temat}
+
+Tematem niniejszej pracy magisterskiej jest ``Lokalizacja ruchomego Ÿród³a dŸwiêku w przestrzeni otwartej``.Tematyka pracy jest œciœle zwi¹zana z akustyk¹ i w³aœciwoœciami sygna³u akustycznego
+rozchodz¹cego siê w oœrodku takim jak powietrze. W pracy autor zbada ró¿ne
+metody lokalizacji Ÿród³a dŸwiêku wykorzystuj¹c w³aœciwoœci dŸwiêku oraz ró¿ne algorytmy przetwarzania sygna³ów.
+
+% \section{Podstawowe pojêcia} 
+Okreœlenie ''Lokalizacja`` z tematu pracy odnosi siê do okreœlenia pozycji, w jakiej znajduje siê pewien przedmiot o okreœlonych cechach. Dokonuje siê tego poprzez okreœlenie pozycji wzglêdem pewnego uk³adu odniesienia, konkretnego punktu w przestrzeni. 
+
+ród³o dŸwiêku to przedmiot, którego pozycjê trzeba ustaliæ. Jako ¿e ów przedmiot bêdzie lokalizowany poprzez badanie sygna³u akustycznego, w domyœle wydaje pewne dŸwiêki. Zadanie polega na okreœleniu koordynatów tego Ÿród³a wzglêdem mikrofonów, sensorów badaj¹cych wspólne otoczenie.
+
+Sformu³owanie ''Przestrzeñ otwarta`` jest to przestrzeñ, w której nie zachodz¹ zjawiska zwi¹zane z odbijaniem dŸwiêku od ró¿nych powierzchni, na przyk³ad od œcian budynków, lasu, gór i innych przeszkód terenowych. Innymi s³owy to teren odkryty. 
+
+\section{Motywacja i cel pracy}
+Do podjêcia tego tematu pracy autora sk³oni³y zainteresowania zwi¹zane z urz¹dzeniami audio oraz wstêpna analiza zagadnienia bêd¹cego tematem poni¿szej pracy oraz jego zastosowania w militariach. Do opracowania badañ wymagana jest wiedza z wielu dziedzin nauki wliczaj¹c w to akustykê, elektronikê analogow¹ i cyfrow¹, przetwarzanie sygna³ów cyfrowych oraz umiejêtnoœci programowania wielu platform wliczaj¹c w to systemy SoC oparte o rdzeñ ARM oraz standardowe komputery osobiste.
+
+Cz³owiek i zwierzêta posiadaj¹ umiejêtnoœæ lokalizacji ruchomego Ÿród³a dŸwiêku dziêki rozwiniêtemu zmys³owi s³uchu oraz umiejêtnoœci interpretacji sygna³u dŸwiêkowego przez mózg. Pomimo du¿ego skomplikowania tego procesu cz³owiek potrafi podaæ po³o¿enie i œledziæ ruch paru Ÿróde³ dŸwiêku jednoczeœnie w zaszumionym œrodowisku. Na przyk³ad œledziæ ruch paru aktorów na scenie teatru. Oczywiœcie takie mo¿liwoœci s¹ zale¿ne od osobistych predyspozycji cz³owieka, charakterystyce dŸwiêku, który jest przedmiotem lokalizacji oraz wszelkim zniekszta³ceniom dŸwiêku w otaczaj¹cej  przestrzeni, która mo¿e byæ przyczyn¹ wszelkich zak³óceñ sygna³u. 
+
+Zastosowaniem takiego systemu mo¿e byæ na przyk³ad uk³ad lokalizuj¹cy Ÿród³o wystrza³u z broni palnej. Urz¹dzenia zawieraj¹ce takie systemy ju¿ istniej¹ i z powodzeniem pomagaj¹ ¿o³nierzom lokalizowaæ wystrza³y nieprzyjaciela, a dziêki temu broniæ siê przed jego atakami. 
+
+Tematem pracy jest analiza wykonalnoœci systemu lokalizuj¹cego Ÿród³o dŸwiêku. 
+Jako, ¿e w dalszej czêœci pracy zostanie przedstawione, ¿e mo¿na taki system opracowaæ - celami poœrednimi staj¹ siê kolejne etapy budowy tego systemu, a wiêc zaprojektowanie, implementacja i przetestowanie w naturalnych warunkach urz¹dzenia. 
+W zwi¹zku z powy¿szymi stwierdzeniami celem pracy staje siê opracowanie systemu potrafi¹cego lokalizowaæ ruchome Ÿród³o dŸwiêku. 
+
+\section{Zakres pracy}
+
+Najbardziej obrazowym sposobem przedstawienia zakresu pracy bêdzie omówienie kolejnych rozdzia³ów:
+
+\begin{itemize}
+ \item \emph{Omówienie stanu wiedzy}
+
+      W rozdziale omówiono aktualny stan wiedzy dotycz¹cy zagadnieñ lokalizacji Ÿród³a dŸwiêku oraz istniej¹cych systemów militarnych i obronnych o nie opartych. Przedstawiono strategiczne czêœci ca³ej drogi prowadz¹cej od akwizycji sygna³u a¿ po koñcowe obliczenia systemu lokalizuj¹cego Ÿród³o dŸwiêku. 
+
+\item \emph{Matematyczne podstawy dzia³ania systemu}
+
+      Ten rozdzia³ zawiera szczegó³owy opis kolejnych etapów procesu lokalizacji. 
+
+
+\item \emph{Projekt i integracja}
+
+    W rozdziale tym omówiono czêœæ sprzêtow¹ oraz programow¹ projektu systemu i wszystkie jego najwa¿niejsze elementy. Autor przedstawi³ równie¿ w³asne spostrze¿enia dotycz¹ce pojawiaj¹cych siê problemów, sposobów ich eliminacji oraz opisa³ newralgiczne elementy maj¹ce kluczow¹ rolê w prawid³owym dzia³aniu aplikacji. 
+
+
+\item \emph{Badania i testy}
+
+    Ten rozdzia³ zawiera informacje dotycz¹ce pracy systemu, jego jakoœci oraz dok³adnoœci uzyskanych podczas badañ pomiarów. 
+
+\item \emph{Podsumowanie i wnioski}
+
+    Rozdzia³ szósty jest podsumowaniem wyników badañ przeprowadzonych za pomoc¹ skonstruowanego systemu lokalizacji Ÿród³a dŸwiêku. Zawiera równie¿ przemyœlenia autora na temat przysz³ych mo¿liwych unowoczeœnieñ i modyfikacji. 
+
+\end{itemize}

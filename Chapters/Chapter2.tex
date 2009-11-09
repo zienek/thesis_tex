@@ -1,0 +1,255 @@
+\chapter{Omówienie stanu wiedzy oraz istniej¹cych rozwi¹zañ}
+\label{Rozdzial2}
+\lhead{Rozdzia³ 2. \emph{Omówienie stanu wiedzy, istniej¹ce rozwi¹zania}} 
+
+Tematyka pracy jest œciœle zwi¹zana z dŸwiêkiem i przetwarzaniem sygna³u. Dlatego w tym rozdziale zostan¹ opisane zagadnienia z dziedziny akustyki oraz metody przetwarzania danych dŸwiêkowych. 
+
+\begin{itemize}
+  \item Etapy akwizycji danych
+  \begin{itemize}
+    \item {Mikrofon}
+    \item {Analogowa postaæ sygna³u akustycznego}
+    \item {Cyfrowa postaæ sygna³u akustycznego}
+    \item {Przetwarzanie analogowo-cyfrowe}
+  \end{itemize}
+  \item {Okienkowanie sygna³u}
+    \begin{itemize}
+     \item {Ograniczony czas próbkowania sygna³u}
+     \item {Przeciek widmowy}
+     \item {Zastosowanie funkcji okna}
+    \end{itemize}
+
+  \item {Metody wyznaczania kierunku Ÿród³a dŸwiêku}
+    \begin{itemize}
+     \item TDoA
+     \item ToA 
+    \end{itemize}
+
+  \item {Obliczanie kierunku na podstawie opóŸnieñ}
+    \begin{itemize}
+     \item {Korelacja sygna³ów, jako sposób na wykrycie opóŸnieñ.}
+     \item Korelacja z matematycznego punktu widzenia
+     \item Opublikowane modyfikacje algorytmu podstawowego
+    \end{itemize}
+
+  \item {Inne algorytmy lokalizacji Ÿród³a dŸwiêku}
+  \item {Rzeczywiste implementacje systemów}
+  
+\end{itemize}
+
+
+\section{Etapy akwizycji danych}
+\subsection{Mikrofon}
+
+Mikrofon to urz¹dzenie, które reaguje na drobne zmiany ciœnienia akustycznego swojego otoczenia i odzwierciedla te zmiany za pomoc¹ kszta³towania napiêcia w swoim obwodzie elektrycznym. Ró¿ne typy mikrofonów mog¹ osi¹gaæ ten cel innymi sposobami. Niektóre mikrofony powoduj¹ ruch cewki elektrycznej wzglêdem rdzenia w ten sposób indukuj¹c pr¹d. Mikrofony pojemnoœciowe natomiast s¹ zbudowane na zasadzie kondensatora ze zmienn¹ odleg³oœci¹ pomiêdzy ok³adzinami. Ich wad¹ jest to, ¿e musz¹ byæ wstêpnie zasilane, poniewa¿ przy zerowym napiêciu pomiêdzy ok³adkami kondensatora nie zachodzi ¿adne zjawisko powoduj¹ce zmianê napiêcia lub natê¿enia pr¹du na ok³adkach kondensatora. 
+
+Kolejnym kryterium podzia³u mikrofonów jest ich kierunkowoœæ. Mo¿na zobrazowaæ ten parametr jako okreœlenie szerokoœci k¹ta, z którego mikrofon potrafi dobrze zebraæ dŸwiêk. Ze wzglêdu na t¹ cechê wyró¿niamy mikrofony dookólne i kierunkowe. \rdm{kszta³t kartioidy, superkartioidy}
+\rdm{Dopiszê trochê teorii o mikrofonach, jak tylko dostane ksi¹¿kê od £ukasza}
+
+\todo{Napisaæ o typach mikrofonów. ale ¿e wykorzystam elektret... }
+
+\subsection{Charakterystyka sygna³u akustycznego}
+
+ Postaæ analogowa jest najbli¿szym odzwierciedleniem naturalnego sygna³u akustycznego. Ma to zwi¹zek z tym, ¿e przy obróbce sygna³u dŸwiêkowego mo¿na wykorzystaæ sam tylko tor analogowy, bez wykorzystania jakiegokolwiek urz¹dzenia cyfrowego. Pomimo wielkich starañ nie da siê pomin¹æ czêœci analogowej przy pracy z dŸwiêkiem. 
+
+Sygna³ analogowy mo¿na przedstawiæ jako odzwierciedlenie ciœnienia akustycznego oddzia³uj¹cego na mikrofon lub inny sensor analogowy na napiêcie lub natê¿enie pr¹du elektrycznego. Poza mikrofonem, urz¹dzeniem wejœciowym mo¿e byæ gramofon na p³yty winylowe, gdzie ukszta³towanie rowka na powierzchni p³yty powoduje zmianê po³o¿enia ig³y i wyindukowanie pr¹du we wk³adce gramofonowej. Pr¹d ten odpowiednio wzmocniony przez kolejne stopnie wzmacniaczy akustycznych mo¿e zostaæ odtworzony przez g³oœnik i cieszyæ ucho s³uchacza tak samo jak dzia³o siê to w po³owie XX wieku. 
+
+Wad¹ korzystania tylko ze œcie¿ki analogowej jest doœæ podstawowy zakres mo¿liwoœci manipulacji charakterystyk¹ sygna³u audio. Inaczej siê ma sprawa w dŸwiêku zapisanym w formie elektronicznej. 
+
+\subsection{Sygna³ akustyczny w postaci cyfrowej}
+
+Postaæ cyfrowa sygna³u poszerza bardzo mocno mo¿liwoœci manipulacji na danych dŸwiêkowych. Mo¿na j¹ zapisaæ w pamiêci uk³adu cyfrowego, nastêpnie wielokrotnie j¹ modyfikowaæ, wyd³u¿aæ, zmieniaæ widmo czêstotliwoœciowe, obcinaæ konkretne czêstotliwoœci, dodawaæ echo, pog³os i wiele innych mo¿liwoœci. To wszystko obliczane za pomoc¹ wzorów matematycznych i obróbki przeprowadzanej na milionach zer i jedynek w pamiêci masowej komputera. Operacje te mo¿na bez szkody dla jakoœci pierwowzoru powtarzaæ w nieskoñczonoœæ, dokonywaæ przeróbek i je cofaæ do stanu oryginalnego. Wszystko dlatego, ¿e postaæ cyfrowa dŸwiêku jest informacj¹ - niematerialnym bytem nie zajmuj¹cym miejsca, nie starzej¹cym siê, nie posiadaj¹cym wagi, gdzie gabaryty nie oznaczaj¹ zajmowanego miejsca w przestrzeni, a wielokrotne odtwarzanie nie powoduje straty jakoœci.
+
+Skoro próba lokalizacji Ÿród³a dŸwiêku opiera siê o skomplikowane algorytmy, to nie obêdzie siê bez obróbki cyfrowej reprezentacji sygna³u dŸwiêkowego. Sensorami wejœciowymi s¹ mikrofony. Nale¿y wiêc po³¹czyæ œwiat analogowy z cyfrowym. Osi¹ga siê to za pomoc¹ przetworników analogowo-cyfrowych. 
+
+\subsection{Konwersja analogowo-cyfrowa}
+Konwersja z postaci analogowej do cyfrowej to jedna z podstawowych operacji wykonywanych podczas przetwarzania strumienia danych dŸwiêkowych. Urz¹dzeniem, które wykonuje tê operacje, jest przetwornik analogowo-cyfrowy ADC.
+Najproœciej mo¿na okreœliæ taki przetwornik jako dzielnik, który ma na wejœciu wartoœæ analogow¹, a na wyjœciu postaæ cyfrow¹. Wyjœcie okreœla, jak¹ czêœci¹ napiêcia referencyjnego jest aktualna wartoœæ napiêcia na wejœciu. Mo¿na go opisaæ nastêpuj¹cym wzorem
+
+\begin{equation}
+\label{equation:1}
+    Wyjscie = 2^n \times W \times \frac{V_{wej}}{V_{ref}},
+\end{equation} 
+
+gdzie $n$ oznacza liczbê bitów wartoœci binarnej na wyjœciu przetwornika, $W$ - wzmocnienie(zwykle 1x), $V_{wej}$ - napiêcie wejœciowe, $V_{ref}$ - napiêcie referencyjne. 
+\cite{Gray:2003} 
+
+Cyfrowa reprezentacja sygna³u jest postaci¹ dyskretn¹. Oznacza to, ¿e wartoœæ sygna³u jest podana dla danego momentu czasu. Teoretycznie nie powinno okreœlaæ siê wartoœci sygna³u pomiêdzy pomiarami. Jednak¿e przy badaniu w³aœciwoœci akustycznych mo¿na przyj¹æ, ¿e próbkowanie sygna³u analogowego rzêdu 48ksps jest wystarczaj¹ce, by z du¿¹ dok³adnoœci¹ okreœlaæ dŸwiêk w krótkich momentach czasu pomiêdzy pomiarami. Znaczenie dŸwiêków o wy¿szej czêstotliwoœci jest deprecjonowane przez fizyczne w³aœciwoœci drgañ oraz mo¿liwoœci ludzkiego ucha. 
+
+\section{Okienkowanie sygna³u}
+\todo{Steven Smith ? Podrêcznik poradnik dla in¿ynierów, CYFROWE PRZETWARZANIE SYGNA£ÓW, Nadachowski, DSPguide, jedna z najlepszych}
+\todo{Zieliñski CPS, ponad 300 MB}
+Na jakoœæ badañ wszelkich sygna³ów ma wp³yw jak najlepsza jakoœæ i czystoœæ sygna³u i odseparowanie go od szumów i zak³óceñ, które wprowadzaj¹ b³êdy do obliczeñ. 
+Jako ¿e metoda lokalizacji dŸwiêku wymaga przetwarzania danych w postaci widmowej, wa¿ne jest aby tak¿e ta postaæ jak najlepiej odzwierciedla³a sygna³ rzeczywisty. W zwi¹zku z tym wymogiem powstaj¹ dwa podstawowe problemy: mianowicie fakt, i¿ mo¿na mierzyæ sygna³ tylko przez limitowany czas; oraz kolejny mówi¹cy o tym, ¿e FFT oblicza wartoœæ sygna³u tylko dla konkretnych dyskretnych czêstotliwoœci. Limit czasu pomiaru jest spraw¹ fundamentaln¹ dla ka¿dej techniki analizy widmowej sygna³u. 
+
+\subsection {Ograniczony okres okreœlonoœci sygna³u}
+
+Nic nie mo¿e byæ uznane za pewnik poza konkretnym zbadanym przedzia³em czasu. Dla zobrazowania rozmiaru problemu nale¿y dodaæ, ¿e dla niektórych obliczeñ trzeba za³o¿yæ pewien charakter sygna³u. W przypadku transformaty Fouriera domniemanym za³o¿eniem jest okresowoœæ sygna³u. Oznacza to, ¿e zak³ada siê powtarzalnoœæ zbadanego fragmentu sygna³u przed i po przeanalizowanym fragmencie. Niestety ma to czasem op³akane skutki, gdy¿ próba konkatenacji tego samego fragmentu sygna³u mo¿e wprowadziæ wiele zak³óceñ i wprowadziæ takie cechy sygna³u, których ten¿e zupe³nie nie ma. Mo¿na taki przypadek zaobserwowaæ na poni¿szym rysunku. 
+
+\begin{figure}[htbp] 
+	\centering
+		\includegraphics[height=80mm]{without_windowing.eps}
+ 		\rule{35em}{0.5pt} 
+	\caption{Modyfikacja sygna³u \citep{Reference4}}
+	\label{fig:rys1}
+\end{figure}
+
+Pierwszy wykres sygna³u z rysunku \ref{fig:rys1}  przedstawia sinusoidê. Wyciêcie fragmentu, który nie jest równy jednemu okresowi (druga czêœæ rysunku) po scaleniu w d³u¿szy fragment ca³kowicie zaburza kszta³t sygna³u pierwotnego (zaburzenie przedstawiono na trzecim wykresie rysunku). 
+
+Reasumuj¹c mo¿na stwierdziæ, ¿e wiêkszoœæ sygna³ów rzeczywistych bêdzie mia³o nieci¹g³oœæ na koñcach spróbkowanego odcinku czasu. Podczas wykonywania algorytmu FFT zak³ada siê, ¿e sygna³ powtarza siê, co jest sprzeczne z nieci¹g³oœciami badanego odcinka sygna³u, których on w rzeczywistoœci nie mia³. 
+
+W zwi¹zku z tym, ¿e ostre zakoñczenie sygna³u ma bardzo szerokie widmo czêstotliwoœciowe - tak¿e widmo badanego sygna³u zostanie zak³ócone. 
+
+\subsection {Przeciek widmowy}
+
+Doœæ ³atwo przyswoiæ sobie podstawowe pojêcie na temat wycieku widmowego poprzez przyk³ad czystej sinusoidy. W rzeczywistoœci w dziedzinie czêstotliwoœci taki sygna³ powinien mieæ tylko jeden pr¹¿ek w miejscu odpowiadaj¹cym okresowi sinusoidy. Sposób obliczania FFT jednak spowoduje rozmycie tej jednej wartoœci tak¿e na s¹siaduj¹ce czêstotliwoœci. W przypadku bardziej skomplikowanego sygna³u, posiadaj¹cego wiêcej pr¹¿ków, rozmycie bêdzie przeprowadzone w podobny sposób dla ka¿dego z pr¹¿ków. 
+
+To rozmycie oznacza, ¿e energia sygna³u, która powinna byæ skoncentrowana tylko w jednym punkcie na osi widma zamiast tego przecieka do s¹siednich czêstotliwoœci. 
+
+Jako ¿e wyciek widmowy jest zwi¹zany z nag³ymi nieci¹g³oœciami sygna³u, ten niepo¿¹dany efekt jest gorszy dla sygna³ów, gdzie powstaje nag³e "urwanie" sygna³u. 
+
+Niekiedy mo¿na trafiæ na takie warunki, ¿e zdaje siê, ¿e analizowany sygna³ zdaje siê nie mieæ nieci¹g³oœci na koñcach okreœlonoœci. Wtedy efekt wycieku widmowego mo¿e byæ znacz¹co zniwelowany. Sytuacja taka mo¿e mieæ miejsce, gdy badaniu podlega sinusoida próbkowana z tak¹ czêstotliwoœci¹ i okresem, ¿e idealnie wpasuje siê w postaæ okresow¹, co zagwarantuje bardzo du¿e podobieñstwo do oryginalnego sygna³u przed wyciêciem fragmentu do przeprowadzenia FFT. Wtedy wyciek widmowy nie wyst¹pi. 
+
+Kolejnym przyk³adem zniwelowania efektu wycieku widmowego jest taki, w którym na ka¿dym z krañców badanego wycinka sygna³ ³agodnie d¹¿y do zera. Brak nag³ej nieci¹g³oœci bardzo ograniczy niepo¿¹dane dzia³anie wycieku widmowego. 
+
+Wyciek widmowy nie jest b³êdem obliczeniowym procedury FFT, jednak wystêpuje w zwi¹zku z tym, ¿e sygna³ by³ mierzony tylko przez limitowany przedzia³ czasu. Jeœliby chcieæ uzyskaæ tylko jeden pr¹¿ek przy badaniu sygna³u sinusoidy, musia³aby ona istnieæ od minus nieskoñczonoœci do nieskoñczonoœci. Jest to niestety w in¿ynierskim podejœciu niemo¿liwe do osi¹gniêcia przez co nale¿y mieæ wzgl¹d na rezultat takiego uproszczenia w postaci wycieku widmowego. 
+
+Dwa najwiêksze problemy generowane przez efekt wycieku widmowego to:
+\begin{itemize}
+\item {Ka¿dy pr¹¿ek postaci widmowej oprócz energii sygna³u zawiera równie¿ szum zebrany z ca³ego spektrum. Degradowany w ten sposób jest SNR - wspó³czynnik poziomu sygna³u do szumu. } 
+\item {Wyciek widmowy z pr¹¿ka o du¿ej energii mo¿e zamaskowaæ drobniejsze pr¹¿ki na s¹siaduj¹cych czêstotliwoœciach \citep{Reference4}} 
+\end{itemize} 
+
+\subsection{Zastosowanie funkcji okna}
+
+Proces pomiaru sygna³u przez ograniczony czas jest równoznaczny z przemno¿eniem sygna³u przez funkcjê w kszta³cie prostok¹ta o jednostkowej amplitudzie. D³ugoœæ prostok¹ta w osi czasu jest wprost proporcjonalna do d³ugoœci trwania pomiaru. Takie dzia³anie powoduje, ¿e w wyniku otrzymujemy sygna³ mieszcz¹cy siê czasowo wewn¹trz prostok¹ta. Takie spojrzenie na wycinanie fragmentu sygna³u przez prostok¹t nazywa siê oknem prostok¹tnym. Okienkowanie sygna³y oknem prostok¹tnym zosta³o przedstawione na rysunku \ref{fig:rys2}. 
+
+Cech¹ wspóln¹ wszystkich okien bez wzglêdu na kszta³t jest to, ¿e sygna³ poza granic¹ okreœlonoœci zostaje zredukowany do zera. Z poœród wszystkich popularnych typów okien, w przypadku okna prostok¹tnego mog¹ powstawaæ najwiêksza ró¿nica pomiêdzy sygna³em oczekiwanym przez FFT na skraju jego okreœlonoœci a jego wartoœci¹.
+
+
+Sygna³, który zosta³ ograniczony oknem prostok¹tnym poza oknem ma wartoœæ 
+
+\begin{figure}[htbp] 
+	\centering
+		\includegraphics[height=80mm]{rectang_signal_fft.eps}
+ 		\rule{35em}{0.5pt} 
+	\caption{Reakcja FFT na okno prostok¹tne}
+	\label{fig:rys2}
+\end{figure}
+
+£agodne d¹¿enie badanego sygna³u przy krañcach okreœlonoœci do zera  niweluje efekt wycieku widmowego. Powy¿sze stwierdzenie prowadzi do konkluzji, ¿e warto dany sygna³ przemno¿yæ przez funkcjê, która delikatnie zredukuje sygna³ do zera przy punktach krañcowych. W ten sposób omija siê problem nieci¹g³oœci koñców analizowanego sygna³u podczas dzia³ania FFT. Tak¹ technikê polepszenia jakoœci postaci widmowej obrazuje poni¿szy rysunek \ref{fig:rys3}
+
+\begin{figure}[htbp] 
+	\centering
+		\includegraphics[height=80mm]{rectang_hamming_2_fft.eps}
+ 		\rule{35em}{0.5pt} 
+	\caption{Ró¿nica pomiêdzy oknem prostok¹tnym a oknem Hamminga}
+	\label{fig:rys3}
+\end{figure}
+
+Porównuj¹c oba wykresy FFT z rysunku \ref{fig:rys2} widaæ praktycznie p³ask¹ w œrodkowym przebiegu charakterystykê widmow¹ sygna³u oryginalnego oraz postrzêpion¹ charakterystykê sygna³u odseparowanego ze œrodka orygina³u. Nastêpnie nale¿y porównaæ wykresy FFT przedstawione na kolejnym rysunku \ref{fig:rys3}. Tutaj wycinek, który zosta³ przemno¿ony przez okno o ³agodnym spadku przy krañcach okreœlonoœci (okno Hamminga) odzwierciedla o wiele lepiej FFT sygna³u oryginalnego sygna³u ni¿ jego prostok¹tny odpowiednik.
+
+\section {Time Difference of Arrival}
+
+Szacowanie opóŸnieñ czasu to temat badañ i wysokim znaczeniu w wielu dziedzinach (radary, sonary, sejsmologia, geofizyka, ultradŸwiêki, geo-lokalizacja, Global Positioning System GPS). To pierwszy krok w procesie identyfikacji, lokalizacji i œledzenia Ÿróde³ sygna³u. Przez ostatnie dekady dokonano du¿ego postêpu w tych dziedzinach. Algorytmy s¹ coraz bardziej dok³adne i mniej czu³e na zak³ócenia i pog³os. \citep{Reference1}
+
+Ze wzglêdu na sw¹ naturê estymacja opóŸnieñ dzieli siê na dwie szerokie kategorie. ToA oraz TDoA. Podczas gdy pierwsza metoda opiera siê na pomiarze opóŸnienia pomiêdzy wys³aniem sygna³u a odbiorem jego echa, co jest domen¹ spotykan¹ w systemach radarowych i aktywnych sonarowych, druga metoda odnosi siê tylko do znalezienia relatywnej ró¿nicy w czasie dotarcia sygna³u do dwóch oddzielnych sensorów. Ten drugi system ma zastosowanie w systemach zaopatrzonych w radary pasywne oraz mikrofony. Aby okreœliæ tê ró¿nicê - system do rozpoznawania kierunku musi byæ wyposa¿ony w przynajmniej dwa mikrofony. Inaczej wygl¹da realizacja systemu ToA gdzie wymagany jest tylko jeden sensor, ale oprócz niego system musi posiadaæ jeszcze nadajnik sygna³u referencyjnego, którego echo jest póŸniej wyszukiwane. 
+
+W zwi¹zku ze sposobem lokalizacji za pomoc¹ dŸwiêku metoda ToA jest nieadekwatna do tego typu zastosowania i w dalszej czêœci pracy omówione zostan¹ etapy potrzebne do obliczenia pozycji Ÿród³a dŸwiêku za pomoc¹ algorytmu TDoA. 
+
+Najbardziej popularne metoda lokalizacji Ÿród³a dŸwiêku opiera siê o wykorzystanie pary mikrofonów. Jeœli jako mo¿liw¹ pozycjê Ÿród³a dŸwiêku rozpatrujemy ca³¹ przestrzeñ, to taka liczba sensorów pozwala na zacieœnienie obszaru poszukiwañ po³o¿enia Ÿród³a dŸwiêku do p³aszczyzny. Przy jednakowym opóŸnieniu czasu dotarcia dŸwiêku do obu mikrofonów, p³aszczyzna zawieraj¹ca w sobie punkt, na którym znajduje siê Ÿród³o dŸwiêku, jest wyznaczona dok³adnie przez punkt po³o¿ony na œrodku prostej przechodz¹cej przez oba mikrofony, a wektor normalny tej p³aszczyzny jest z t¹ prost¹ równoleg³y. Jeœli istnieje ró¿nica w czasie dotarcia, p³aszczyzna zmienia kszta³t na podzbiór hiperboloidy dwupow³okowej. 
+
+Hiperboloida powstaje poprzez obrót hiperboli wzglêdem jej ogniska. Wynika z tego fakt, ¿e jeœli obszar badania rozpatrujemy jako p³aszczyznê, taki pomiar umo¿liwia wyznaczenie po³o¿enia Ÿród³a dŸwiêku na przekroju hiperboloidy a wiêc na ramionach hiperboli. Mo¿liwoœæ takiego sprecyzowania poza ograniczeniem obszaru poszukiwañ daje równie¿ zastosowanie trzeciego mikrofonu. Id¹c dalej t¹ drog¹ mo¿na wywnioskowaæ, ¿e cztery mikrofony daj¹ mo¿liwoœæ precyzyjnego wyznaczenia punktu po³o¿enia Ÿród³a dŸwiêku w przestrzeni. 
+
+Najwa¿niejszym etapem wyznaczenia ró¿nicy czasu w dotarciu dŸwiêku jest porównanie sygna³u zarejstrowanego przez mikrofony. Podstawow¹ metod¹ wykorzystywan¹ do tego celu jest korelacja. 
+
+\subsection{Korelacja sygna³ów, jako sposób na wykrycie opóŸnieñ}
+
+Korelacja jako termin oznacza stopieñ, w jakim dwa dane sygna³y s¹ do siebie podobne. 
+
+Zadaniem korelacji w znalezieniu opóŸnienia pomiêdzy dwoma sygna³ami jest okreœlenie, przy jakim przesuniêciu jednego sygna³u wzglêdem drugiego, podobieñstwo pomiêdzy oboma sygna³ami jest najwiêksze. 
+
+Nale¿y rozwa¿yæ dwa mikrofony oddalone od siebie o odleg³oœæ $d$ . W zasiêgu pracy mikrofonów znajduje siê pojedyncze Ÿród³o dŸwiêku. Ka¿dy z mikrofonów otrzymuje sygna³, odpowiednio $m_1(t)$   oraz  $m_2(t)$ .
+
+Obydwa sygna³y s¹ idealnie przeskalowanymi i opóŸnionymi w czasie wersjami wzglêdem siebie. Jednak¿e w praktyce sygna³ mikrofonowy bêdzie zak³ócony poprzez zewnêtrzny szum, pog³osy oraz szum samego mikrofonu. Oznacza to, ¿e sygna³ mikrofonowy mo¿na zapisaæ wzorami dla ka¿dego z sensorów jak nastêpuje
+
+\begin{equation}
+\label{eq:4}
+    m_1(t) = s(t) + n_1(t),
+\end{equation}
+
+\begin{equation}
+\label{eq:5}
+    m_2(t) = s(t+\tau) + n_2(t),
+\end{equation}
+
+gdzie $s(t)$ oraz $s(t+\tau)$ s¹ sygna³ami otrzymanymi od Ÿród³a dŸwiêku, a $n_{1}(t)$ oraz $n_{2}(t)$ to wszystkie szumy zebrane wraz z sygna³em poprzez mikrofony. TDoA, który nale¿y obliczyæ to $\tau$. W zwi¹zku z doœæ ma³¹ ró¿nic¹ odleg³oœci mikrofonów od siebie - t³umienie dŸwiêku mo¿na pomin¹æ dla celów uproszczenia wyprowadzeñ matematycznych. Dodatkowo to uproszczenie nie wp³ywa na wynik, poniewa¿, jak zostanie to przybli¿one poni¿ej, amplituda ka¿dego z sygna³ów nie gra istotnej roli w wybranych algorytmach. 
+
+Opiszmy transformatê Fouriera otrzymanych sygna³ów jako odpowiednio $M_{1}(\omega)$ oraz  $M_{2}(\omega)$. Oszacowanie $\tau$ mo¿e byæ obliczone za pomoc¹ korelacji w dziedzinie czêstotliwoœci poprzez znalezienie opóŸnienia (przesuniêcia fazowego), które zwiêksza wynik korelacji pomiêdzy sygna³ami $m_{1}$ a $m_{2}$, co mo¿na zobrazowaæ poni¿szym wzorem
+
+\begin{equation}
+\label{eq:6}
+	\displaystyle\tilde{\tau} = \arg \max_\beta \int^\infty_{\omega=-\infty} M_1(\omega) \overline { M_2(\omega) } e^{-j\omega\beta} d\omega .
+\end{equation}
+
+T³umacz¹c ten wzór jak najproœciej mo¿na stwierdziæ, ¿e TDoA polega na poszukiwaniu takiego $\beta$ dla którego wynik korelacji jest najwiêkszy. 
+
+Ogólna korelacja lub innymi s³owy niefiltrowana korelacja (GCC), okreœlona wzorem \eqref{eq:6} jest metod¹ czu³¹ na zak³ócenia i pog³os.\citep{Reference2} 
+
+Aby uskuteczniæ dzia³anie korelacji w bardziej zaszumionym otoczeniu wprowadzono czynnik równowa¿¹cy  $ W(\omega) $ . Jego zastosowanie we wzorze  \eqref{eq:6}  wygl¹da nastêpuj¹co
+
+\begin{equation}
+\label{eq:7}
+	\displaystyle\tilde{\tau} = \arg \max_\beta \int^\infty_{\omega=-\infty} W(\omega) M_1(\omega) \overline { M_2(\omega) } e^{-j\omega\beta} d\omega .
+\end{equation}
+
+gdzie niektóre z mo¿liwych wartoœci równowa¿¹cych s¹ podane wzorami
+
+\begin{equation}
+	\label{eq:8}
+	\begin{array}{l}
+		W_{GCC}(\omega) = 1, \\
+	
+		W_{ML}(\omega) = \displaystyle\frac{\mid M
+_1(\omega)\mid \mid M_2(\omega)\mid}{\mid N_1(\omega)\mid^2 \mid M_2(\omega)\mid^2 + \mid N_2(\omega)\mid^2 \mid M_1(\omega)\mid^2 }, \\
+	
+		W_{PHAT}(\omega) = \displaystyle\frac{1}{\mid M_1(\omega)\mid\mid M_2(\omega)\mid}
+	
+	\end{array}
+\end{equation}
+
+odpowiednio dla korelacji w wersji podstawowej (GCC), algorytmu ML oraz PHAT.
+
+Zasada dzia³ania wszystkich zbadanych algorytmów jest bardzo podobna. Polega na wyselekcjonowaniu dwóch zbiorów próbek o tej samej d³ugoœci, przejœciu do dziedziny czêstotliwoœci, po czym nale¿y wykonaæ w³aœciw¹ operacjê korelacji - przemno¿enie obu wektorów danych przez siebie, ¿eby okreœliæ "moc" podobieñstwa. Nastêpnie jeden z wektorów przesuwa siê o jedn¹ próbkê i znów przemna¿a s¹siaduj¹ce elementy obu wektorów przez siebie i dodaje iloczyny. Powstaje kolejny element okreœlaj¹cy "moc" czyli wskaŸnik podobieñstwa. Po przemno¿eniu ca³oœci powstaje wektor danych. Miejsce, gdzie znajduje siê wartoœæ maksymalna, a dok³adniej wielkoœæ odchylenia tego miejsca od œrodka zbioru pojedynczych korelacji, mo¿na uznaæ za najbardziej prawdopodobne przedstawienie opóŸnienia pomiêdzy oboma sygna³ami. 
+
+Jako ¿e istnieje mo¿liwoœæ zak³ócenia i niejednoznacznie wyznaczenie ekstremum, które jest najbardziej prawdopodobnym przedstawieniem opóŸnienia sygna³ów miêdzy sob¹, stosuje siê wspó³czynniki równowa¿¹ce. 
+
+
+\section{Pilar MK II}
+Akustyczny system wykrywania strza³ów i lokalizacji strzelca PILAR Mk IIw firmy 01db-Metravib jest przedstawicielem rodziny akustycznych systemów detekcji strza³ów (AGDS - Acoustic Gunshot Detection System). \cite{PilarMK2}
+
+System wystêpuje w paru wersjach. Ró¿ni¹ siê miêdzy sob¹ iloœci¹ i typem modu³ów.  
+\begin{itemize}
+ \item \textbf{Wersja stacjonarna} jest wyposa¿ona w dwa zespo³y antenowe ASA sk³adaj¹ce siê z macierzy mikrofonowych oraz modu³ów elektronicznych umieszczonych na statywie, modu³u przetwarzania danych DIAM <ang. Data Interface and Aquisition Module>, kompas, dwie szpule kabla po³¹czeniowego ASA-DIAM, oraz wzmocnionego komputera, który s³u¿y jako jednosta wizualizuj¹ca dane za pomoc¹ dedykowanego oprogramowania ShotGuard, kable zasilania oraz dokumentacja. Zestaw stacjonarny mo¿na rozszerzyæ miêdzy innymi o modu³ PIVOT, czyli modu³ obserwacyjny wyposa¿ony w kamerê. 
+
+\item \textbf{Wersja mobilna} jest ubo¿sza o jeden modu³ ASA. Drugi zamiast tripoda posiada statyw wyposa¿ony w magnetyczny uchwyt. Wersja mobilna jest dostosowywana na miarê potrzeb i charakterystyki pojazdu, z jakim bêdzie wykorzystywana. Urz¹dzenie bêd¹ce na wyposa¿eniu polskich pojazdów bojowych Rosomak posiadaj¹ sterowanie i wizualizacjê zintegrowan¹ z terminalem dowódcy przez co wzmocniony laptop sta³ siê niepotrzebny.  Charakterystyczn¹ cech¹ wersji mobilnej jest mo¿liwoœæ filtracji dŸwiêków powstaj¹cych podczas ruchu pojazdu, z którym PILAR zosta³ zintegrowany. Wi¹¿e siê to z nieznacznym pogorszeniem parametrów wykrywalnoœci
+
+\item \textbf{ShotGuard} to programowa czêœæ ca³ego systemu. Wizualizuje wykryt¹ dzia³alnoœæ strzeleck¹ oraz s³u¿y do poprawnej konfiguracji ca³ego systemu. Informuje o takich parametrach Ÿród³a wystrza³u jak:
+ \begin{itemize}
+  \item azymut $^\circ$  
+  \item elewacja $^\circ$ 
+  \item odleg³oœæ $m$
+  \item czas zda¿enia
+ \end{itemize}
+
+\item \textbf{PIVOT} Dodatkowym elementem dostêpnym wraz z systemem PILAR jest PIVOT <PILAR Versatile Observation Turret - PILAR z uniwersaln¹ wierzyczk¹ obserwacyjn¹>. System wizyjny jest w pe³ni przenoœny, szybko konfigurowalny i mo¿e pracowaæ niezale¿nie od systemu PILAR. Sk³ada siê z obrotowo-pochylnej wie¿yczki o du¿ej szybkoœci reakcji oraz dwukana³owej kamery dziennej. 
+
+\end{itemize}
+
+
+PILAR jest systemem wykrywaj¹cym strzelca w promieniu 360 stopni w azymucie oraz 60 stopni w elewacji. Jest w stanie wykryæ i zlokalizowaæ strza³ z broni o kalibrze id 5,56 mm do 25 mm, zarówno pojedyñczy jak i seriê i strza³y zsynchronizowane. Tak¿e inne typy broni, wyposa¿one w t³umik i bez, granaty moŸdzierzowe. Jego dok³adnoœæ zosta³a okreœlona na $\pm$2$^\circ$ w azymucie z u¿yciem jednej lub dwóch matryc mikrofonów; $\pm$5$^\circ$ w elewacji; $\pm$10\% do $\pm$20\%; zasiêg wykrywania 1500m. Czas od zarejestrowania do wyœwietlenia wyników nie przekracza dwóch sekund. 
+
+
+\todo{Opisaæ Danicki}
+
+

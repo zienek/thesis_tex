@@ -1,0 +1,20 @@
+Aby skonstruowaæ i zbadaæ mo¿liwe sposoby i algorytmy lokalizacji dŸwiêku w pocz¹tkowej fazie potrzeba zebraæ materia³ s³u¿¹cy do badañ. Sensorem ³¹cz¹cym otoczenie z systemem s¹ mikrofony. Algorytmy potrafi¹ okreœliæ kierunek docierania dŸwiêku ju¿ za pomoc¹ dwóch mikrofonów. Aby okreœliæ inne w³aœciwoœci, takie jak odleg³oœæ przedmiotu, jego pozycja czy prêdkoœæ - wymagana jest wiêksza iloœæ mikrofonów. Ta praca bêdzie siê opieraæ o algorytmy wymagaj¹ce maksymalnie do czterech mikrofonów. 
+
+Jako ¿e wszelkie zagadnienia zwi¹zane z obróbk¹ dŸwiêku w tej pracy s¹ zwi¹zane z postaci¹ cyfrow¹ sygna³u akustycznego, nale¿y spodziewaæ siê przetwornika analogowo-cyfrowego umieszczonego pomiêdzy mikrofonami a dalsz¹ czêœci¹ systemu. Wybór przetwornika analogowo-cyfrowego polega³ na znalezieniu uk³adu spe³niaj¹cego wymagania algorytmów korelacji oraz umo¿liwiaj¹ce doœæ dok³adne okreœlenie ró¿nicy w dotarciu dŸwiêku do konkretnych mikrofonów.
+
+Jako doœæ proste a zarazem praktyczne rozwi¹zanie transmisji danych do komputera autor wybra³ protokó³ Ethernet jako œcie¿ka dostarczenia próbek sygna³u do w³aœciwych algorytmów zaimplementowanych na komputerze opartego o architekturê x86.
+
+Komputer z procesorem zgodnym z x86 ze wzglêdu na wysok¹ wydajnoœæ w porównaniu z technologiami mobilnymi i uk³adami SoC nadaje siê najlepiej do implementacji algorytmów zwi¹zanych z przetwarzaniem dŸwiêku. Po pierwsze posiada bardzo dobrze dzia³aj¹c¹ jednostkê zmiennoprzecinkow¹, która jest potrzebna do operacji DSP. Obróbka DSP natomiast wymaga operacji na d³ugich wektorach danych. W zwi¹zku z tym wymagany jest procesor o odpowiednio wysokim taktowaniu oraz doœæ du¿a iloœæ pamiêci podrêcznej. W najbli¿szej przysz³oœci urz¹dzenia mobilne bêd¹ce w zasiêgu przeciêtnego cz³owieka osi¹gn¹ tak du¿e zdolnoœci obliczeniowe, ¿e bêdzie mo¿na pokusiæ siê o próbê przeniesienia ca³oœci obliczeñ na tak¹ platformê. 
+
+%\section{Implementacja}
+W zwi¹zku z tym, ¿e sygna³ dŸwiêkowy mo¿na badaæ w nieskoñczonym czasie, jednak taki otwarty ci¹g danych jest niemo¿liwy do kompleksowego zbadania, nale¿y podzieliæ sygna³ na mniejsze, skoñczone odcinki czasu. Przy wykorzystanych w pracy parametrach dotycz¹cych odleg³oœci pomiêdzy poszczególnymi mikrofonami oraz prêdkoœci próbkowania ustalono, ¿e do prawid³owej pracy systemu wystarczy okno czasowe zawieraj¹ce 512 próbek przy maksymalnej wykorzystanej czêstotliwoœci próbkowania. 
+
+DŸwiêk nastêpnie bêdzie poddany okienkowaniu. Aby ograniczyæ niepo¿¹dane zak³ócenia sygna³u przy skrajnych pozycjach okna czasowego stosuje siê przemna¿anie sygna³u przez funkcjê okna. Okno mo¿e byæ opisane ró¿nymi funkcjami. Mo¿e mieæ kszta³t prostok¹tny, trójk¹ta b¹dŸ inny opisany funkcj¹ Blackmana, Gaussa, Hamminga lub inn¹. Zastosowanie ró¿nych funkcji okien powoduje zmianê widma czêstotliwoœciowego sygna³u wejœciowego. Funkcje bardziej z³o¿one, ni¿ okno prostok¹tne czy trójk¹tne powoduj¹ mniejsze zak³ócenie sygna³u. 
+
+Korelacja dwóch sygna³ów to element systemu s³u¿¹cy okreœleniu podobieñstwa pomiêdzy dwoma zestawami danych w zale¿noœci od przesuniêcia pierwszego sygna³u od drugiego. Wartoœæ maksymalna w centrum przedzia³u okreœla sygna³y podobne do siebie i nie przesuniête wzglêdem siebie. Dewiacja ekstremum funkcji od centralnego miejsca przedzia³u okreœlonoœci korelacji oznacza, ¿e z najwiêkszym prawdopodobieñstwem sygna³y s¹ podobne do siebie i przesuniête wzglêdem siebie o iloœæ próbek wprost proporcjonaln¹ do wielkoœci tej dewiacji. 
+
+Kiedy dane jest ró¿nica czasu w dotarciu dŸwiêku do dwóch punktów o znanych wspó³rzêdnych, czyli tak zwane TDoA, od obliczenia kierunku padania dŸwiêku dzieli tylko uk³ad równañ CORDIC. Sposób ich dzia³ania zostanie przybli¿ony na nastêpnych stronach tej¿e pracy.
+
+%\section{Teza}
+%System do lokalizacji dŸwiêku oparty o 4 mikrofony mo¿e osi¹gn¹æ dok³adnoœæ rzêdu 95\% oszacowania kierunku oraz 80\% oszacowania odleg³oœci Ÿród³a dŸwiêku od urz¹dzenia pomiarowego.
+

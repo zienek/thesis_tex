@@ -1,0 +1,73 @@
+% Chapter 1
+
+\chapter{Wstêp} % Write in your own chapter title
+\label{Rozdzial1}
+\lhead{Rozdzia³ 1. \emph{Wstêp}} % Write in your own chapter title to set the page header
+
+
+\section{Temat}
+
+Tematem niniejszej pracy magisterskiej jest ``Lokalizacja ruchomego Ÿród³a dŸwiêku w przestrzeni otwartej``.Tematyka pracy jest œciœle zwi¹zana z akustyk¹ i w³aœciwoœciami sygna³u akustycznego
+rozchodz¹cego siê w oœrodku takim jak powietrze. W pracy autor zbada ró¿ne
+metody lokalizacji Ÿród³a dŸwiêku wykorzystuj¹c w³aœciwoœci dŸwiêku oraz ró¿ne algorytmy przetwarzania sygna³ów.
+
+% \section{Podstawowe pojêcia} 
+Okreœlenie ''Lokalizacja`` z tematu pracy odnosi siê do okreœlenia pozycji, w jakiej znajduje siê pewien przedmiot o okreœlonych cechach. Dokonuje siê tego poprzez okreœlenie pozycji wzglêdem pewnego uk³adu odniesienia, konkretnego punktu w przestrzeni. 
+
+ród³o dŸwiêku to przedmiot, którego pozycjê trzeba ustaliæ. Jako ¿e ów przedmiot bêdzie lokalizowany poprzez badanie sygna³u akustycznego, w domyœle wydaje pewne dŸwiêki. Zadanie polega na okreœleniu koordynatów tego Ÿród³a wzglêdem mikrofonów, sensorów badaj¹cych wspólne otoczenie.
+
+Sformu³owanie ''Przestrzeñ otwarta`` jest to przestrzeñ, w której nie zachodz¹ zjawiska zwi¹zane z odbijaniem dŸwiêku od ró¿nych powierzchni, na przyk³ad od œcian budynków, lasu, gór i innych przeszkód terenowych. Innymi s³owy to teren odkryty. 
+
+\section{Motywacja i cel pracy}
+Do podjêcia tego tematu pracy autora sk³oni³y zainteresowania zwi¹zane z urz¹dzeniami audio oraz wstêpna analiza zagadnienia bêd¹cego tematem poni¿szej pracy oraz jego zastosowania w militariach. Do opracowania badañ wymagana jest wiedza z wielu dziedzin nauki wliczaj¹c w to akustykê, elektronikê analogow¹ i cyfrow¹, przetwarzanie sygna³ów cyfrowych oraz umiejêtnoœci programowania wielu platform wliczaj¹c w to systemy SoC oparte o rdzeñ ARM oraz standardowe komputery osobiste.
+
+Cz³owiek i zwierzêta posiadaj¹ umiejêtnoœæ lokalizacji ruchomego Ÿród³a dŸwiêku dziêki rozwiniêtemu zmys³owi s³uchu oraz umiejêtnoœci interpretacji sygna³u dŸwiêkowego przez mózg. Pomimo du¿ego skomplikowania tego procesu cz³owiek potrafi podaæ po³o¿enie i œledziæ ruch paru Ÿróde³ dŸwiêku jednoczeœnie w zaszumionym œrodowisku. Na przyk³ad œledziæ ruch paru aktorów na scenie teatru. Oczywiœcie takie mo¿liwoœci s¹ zale¿ne od osobistych predyspozycji cz³owieka, charakterystyce dŸwiêku, który jest przedmiotem lokalizacji oraz wszelkim zniekszta³ceniom dŸwiêku w otaczaj¹cej  przestrzeni, która mo¿e byæ przyczyn¹ wszelkich zak³óceñ sygna³u. 
+
+Zastosowaniem takiego systemu mo¿e byæ na przyk³ad uk³ad lokalizuj¹cy Ÿród³o wystrza³u z broni palnej. Urz¹dzenia zawieraj¹ce takie systemy ju¿ istniej¹ i z powodzeniem pomagaj¹ ¿o³nierzom lokalizowaæ wystrza³y nieprzyjaciela, a dziêki temu broniæ siê przed jego atakami. 
+
+Tematem pracy jest analiza wykonalnoœci systemu lokalizuj¹cego Ÿród³o dŸwiêku. 
+Jako, ¿e w dalszej czêœci pracy zostanie przedstawione, ¿e mo¿na taki system opracowaæ - celami poœrednimi staj¹ siê kolejne etapy budowy tego systemu, a wiêc zaprojektowanie, implementacja i przetestowanie w naturalnych warunkach urz¹dzenia. 
+W zwi¹zku z powy¿szymi stwierdzeniami celem pracy staje siê opracowanie systemu potrafi¹cego lokalizowaæ ruchome Ÿród³o dŸwiêku. 
+
+\section{Zakres pracy}
+
+Najbardziej obrazowym sposobem przedstawienia zakresu pracy bêdzie omówienie kolejnych rozdzia³ów:
+
+\begin{itemize}
+ \item \emph{Omówienie stanu wiedzy}
+
+      W rozdziale omówiono aktualny stan wiedzy dotycz¹cy zagadnieñ lokalizacji Ÿród³a dŸwiêku oraz istniej¹cych systemów militarnych i obronnych o nie opartych. Przedstawiono strategiczne czêœci ca³ej drogi prowadz¹cej od akwizycji sygna³u a¿ po koñcowe obliczenia systemu lokalizuj¹cego Ÿród³o dŸwiêku. 
+
+\item \emph{Matematyczne podstawy dzia³ania systemu}
+
+      Ten rozdzia³ zawiera 
+
+
+\item \emph{Projekt i integracja}
+
+
+\item \emph{Badania i testy}
+
+
+\item \emph{Podsumowanie i wnioski}
+\end{itemize}
+
+Aby skonstruowaæ i zbadaæ mo¿liwe sposoby i algorytmy lokalizacji dŸwiêku w pocz¹tkowej fazie potrzeba zebraæ materia³ s³u¿¹cy do badañ. Sensorem ³¹cz¹cym otoczenie z systemem s¹ mikrofony. Algorytmy potrafi¹ okreœliæ kierunek docierania dŸwiêku ju¿ za pomoc¹ dwóch mikrofonów. Aby okreœliæ inne w³aœciwoœci, takie jak odleg³oœæ przedmiotu, jego pozycja czy prêdkoœæ - wymagana jest wiêksza iloœæ mikrofonów. Ta praca bêdzie siê opieraæ o algorytmy wymagaj¹ce maksymalnie do czterech mikrofonów. 
+
+Jako ¿e wszelkie zagadnienia zwi¹zane z obróbk¹ dŸwiêku w tej pracy s¹ zwi¹zane z postaci¹ cyfrow¹ sygna³u akustycznego, nale¿y spodziewaæ siê przetwornika analogowo-cyfrowego umieszczonego pomiêdzy mikrofonami a dalsz¹ czêœci¹ systemu. Wybór przetwornika analogowo-cyfrowego polega³ na znalezieniu uk³adu spe³niaj¹cego wymagania algorytmów korelacji oraz umo¿liwiaj¹ce doœæ dok³adne okreœlenie ró¿nicy w dotarciu dŸwiêku do konkretnych mikrofonów.
+
+Jako doœæ proste a zarazem praktyczne rozwi¹zanie transmisji danych do komputera autor wybra³ protokó³ Ethernet jako œcie¿ka dostarczenia próbek sygna³u do w³aœciwych algorytmów zaimplementowanych na komputerze opartego o architekturê x86.
+
+Komputer z procesorem zgodnym z x86 ze wzglêdu na wysok¹ wydajnoœæ w porównaniu z technologiami mobilnymi i uk³adami SoC nadaje siê najlepiej do implementacji algorytmów zwi¹zanych z przetwarzaniem dŸwiêku. Po pierwsze posiada bardzo dobrze dzia³aj¹c¹ jednostkê zmiennoprzecinkow¹, która jest potrzebna do operacji DSP. Obróbka DSP natomiast wymaga operacji na d³ugich wektorach danych. W zwi¹zku z tym wymagany jest procesor o odpowiednio wysokim taktowaniu oraz doœæ du¿a iloœæ pamiêci podrêcznej. W najbli¿szej przysz³oœci urz¹dzenia mobilne bêd¹ce w zasiêgu przeciêtnego cz³owieka osi¹gn¹ tak du¿e zdolnoœci obliczeniowe, ¿e bêdzie mo¿na pokusiæ siê o próbê przeniesienia ca³oœci obliczeñ na tak¹ platformê. 
+
+%\section{Implementacja}
+W zwi¹zku z tym, ¿e sygna³ dŸwiêkowy mo¿na badaæ w nieskoñczonym czasie, jednak taki otwarty ci¹g danych jest niemo¿liwy do kompleksowego zbadania, nale¿y podzieliæ sygna³ na mniejsze, skoñczone odcinki czasu. Przy wykorzystanych w pracy parametrach dotycz¹cych odleg³oœci pomiêdzy poszczególnymi mikrofonami oraz prêdkoœci próbkowania ustalono, ¿e do prawid³owej pracy systemu wystarczy okno czasowe zawieraj¹ce 512 próbek przy maksymalnej wykorzystanej czêstotliwoœci próbkowania. 
+
+DŸwiêk nastêpnie bêdzie poddany okienkowaniu. Aby ograniczyæ niepo¿¹dane zak³ócenia sygna³u przy skrajnych pozycjach okna czasowego stosuje siê przemna¿anie sygna³u przez funkcjê okna. Okno mo¿e byæ opisane ró¿nymi funkcjami. Mo¿e mieæ kszta³t prostok¹tny, trójk¹ta b¹dŸ inny opisany funkcj¹ Blackmana, Gaussa, Hamminga lub inn¹. Zastosowanie ró¿nych funkcji okien powoduje zmianê widma czêstotliwoœciowego sygna³u wejœciowego. Funkcje bardziej z³o¿one, ni¿ okno prostok¹tne czy trójk¹tne powoduj¹ mniejsze zak³ócenie sygna³u. 
+
+Korelacja dwóch sygna³ów to element systemu s³u¿¹cy okreœleniu podobieñstwa pomiêdzy dwoma zestawami danych w zale¿noœci od przesuniêcia pierwszego sygna³u od drugiego. Wartoœæ maksymalna w centrum przedzia³u okreœla sygna³y podobne do siebie i nie przesuniête wzglêdem siebie. Dewiacja ekstremum funkcji od centralnego miejsca przedzia³u okreœlonoœci korelacji oznacza, ¿e z najwiêkszym prawdopodobieñstwem sygna³y s¹ podobne do siebie i przesuniête wzglêdem siebie o iloœæ próbek wprost proporcjonaln¹ do wielkoœci tej dewiacji. 
+
+Kiedy dane jest ró¿nica czasu w dotarciu dŸwiêku do dwóch punktów o znanych wspó³rzêdnych, czyli tak zwane TDoA, od obliczenia kierunku padania dŸwiêku dzieli tylko uk³ad równañ CORDIC. Sposób ich dzia³ania zostanie przybli¿ony na nastêpnych stronach tej¿e pracy.
+
+%\section{Teza}
+%System do lokalizacji dŸwiêku oparty o 4 mikrofony mo¿e osi¹gn¹æ dok³adnoœæ rzêdu 95\% oszacowania kierunku oraz 80\% oszacowania odleg³oœci Ÿród³a dŸwiêku od urz¹dzenia pomiarowego.

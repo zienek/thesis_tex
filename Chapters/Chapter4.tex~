@@ -1,0 +1,64 @@
+\chapter{Implementacja systemu lokalizacji}
+\label{chapter:implementacja}
+\thispagestyle{empty}
+
+\section{Opis œrodowiska}
+\todo{Jakie Ÿród³o dŸwiêku, jakie warunki zewnêtrzne, czy impuls, czy strza³, jaki jest sygna³ wejœciowy. Czy na klaœniêcie, czy na tupanie, generator z sinusem(sox), ew klocek o klocek z okreœlonej wysokoœci}
+
+
+\section{Implementacja systemu}
+\subsection {Implementacja sprzêtowa}
+
+Implementacja opiera siê o akwizycjê danych poprzez cztero-kana³owy przetwornik analogowo-cyfrowy. W pocz¹tkowej fazie projektu lokalizacji uznano, ¿e wystarczy czterokana³owy przetwornik zaimplementowany sprzêtowo w uk³adzie ATSAM9260 firmy Atmel opartym o rdzeñ ARM9 \citep{Atmel1}. Dziêki coraz wiêkszym mo¿liwoœciom uk³adów SoC takich jak platforma ARM - mo¿na doœæ szybko zaimplementowaæ obs³ugê wielu ró¿nych peryferiów uk³adu. Jego du¿e mo¿liwoœci obliczeniowe oraz posiadanie jednostki zarz¹dzania pamiêci¹ MMU pozwalaj¹ na uruchomienie systemu operacyjnego nadzoruj¹cego interakcje u¿ytkownika systemu z jego zasobami. Dziêki takim mo¿liwoœciom wykorzystano system Linux do obs³ugi przetworników oraz przes³ania danych przez Ethernet do komputera klasy x86, którego mo¿liwoœci obliczeniowe s¹ wystarczaj¹ce, ¿eby wykonaæ doœæ skompilowane obliczenia zwi¹zane z przetwarzaniem sygna³ów cyfrowych oraz lokalizacj¹ Ÿród³a dŸwiêku. 
+
+\subsubsection{Mikrofony oraz przedwzmacniacze}
+Ze wzglêdu na doœæ wysokie koszty mikrofonów o lepszej charakterystyce przenoszenia dŸwiêku autor zdecydowa³ siê na zastosowanie mikrofonów elektretowych. Jak przedstawiono w rozdziale drugim, jakoœæ próbek nie ma du¿ego znaczenia dla dzia³ania algorytmów korelacji. Mikrofony pojemnoœciowe wymagaj¹ wstêpnego zasilenia napiêciem sta³ym bêd¹cym w stanie odk³adaæ siê na ok³adkach kondensatora umieszczonego wewn¹trz mikrofonu. Sygna³ mikrofonowy zosta³ wzmocniony za pomoc¹ uk³adu SSM2166 - przedwzmacniacza mikrofonowego z regulacj¹ kompresji i bramk¹ szumów. Zosta³ on wybrany poniewa¿ ma doœæ du¿e mo¿liwoœci regulacji sygna³u w razie, gdyby zaistnia³a potrzeba korekcji sygna³u dostarczonego z mikrofonu.\citep{Analog1} 
+
+Inne cechy przedwzmacniacza SSM2166 to:
+\begin{itemize}
+ \item zasilanie 5V
+ \item regulowany poziom odciêcia szumów
+ \item mo¿liwoœæ sterowania kompresj¹ dŸwiêku za pomoc¹ zewnêtrznego rezystora
+ \item automatyczny uk³ad ograniczaj¹cy pr¹d wyjœciowy - zabezpieczaj¹cy przed zniszczeniem przetwornika analogowo-cyfrowego
+ \item niski poziom szumów i zak³óceñ
+\end{itemize}
+ 
+W zwi¹zku z tym, ¿e maksymalny dozwolony poziom napiêcia wejœciowego nie mo¿e przekraczaæ napiêcia zasilania (5V), a mikrofony elektretowe s¹ zasilane napiêciem rzêdu 5-12V - nale¿y odseparowaæ oba urz¹dzenia od siebie zgodnie z instrukcj¹ z karty katalogowej uk³adu. Zgodnie z instrukcjami w tej¿e karcie zbudowano uk³ad prototypowy, a po zbadaniu jakoœci pojedyñczego obwodu drukowanego zaprojektowano i wykonano p³ytkê w technologii SMD. 
+ 
+\begin{figure}[htbp] 
+    \centering
+    \includegraphics[height=80mm]{ssm2166_eval_board_schematic.eps}\\ 
+      \rule{35em}{0.5pt} 
+      \caption{Typowa implementacja uk³adu SSM2166}
+    \label{fig:ssm2166_eval_board_schematic}\citep{Analog1}
+\end{figure}
+
+Wyjœcie uk³adu przedwzmacniacza jest zdolne do wysterowania ponad 3 $V_{p-p}$ 
+
+
+\todo{Dodaæ informacjê o przedwzmacniaczach mikrofonowych, charakterystyce przetworników, transmisji przez ethernet, dane techniczne u¿ytego sprzêtu}
+
+\subsection {Implementacja programowa}
+
+\todo{Dodaæ informacjê o sterowniku przetworników. Systemie operacyjnym na ARM, programie wysy³aj¹cym dane , dodaæ info o wersjach oprogramowania (openWrt)}
+\todo{Dodaæ info o trakker, diagramy klas, modu³y, przep³ywów miêdzy modu³ami, œrodowisko programistyczne, QT, schematy}
+
+\subsection{Format danych wejÅ›ciowych oraz wyjÅ›ciowych}
+
+Definicja formatu danych wejÅ›ciowych oraz opis generowanego formatu wyjÅ›ciowego. Uproszony rysunek przedstawiajÄ…cy strukturÄ™ systemu, uwidaczniÄ…jÄ…cy interfejsy.
+
+
+
+\section{Opis implementacji metody}
+
+
+Fragment implementacji, ¿eby kluczowe fragmenty kodu zaznaczyæ, lepiej rysunki algorytmu nazaszdzie bloczków, rombów w zale¿noœci od czegoœ.
+
+Wyniki badañ, czy pozwalaj¹ na okreœlenie kierunku i odleg³oœci Ÿród³a sygna³u. ew b³êdy lokalizacji.
+
+opis dziaÅ‚ania programu (pomocne jest zamieszczanie rysunkÃ³w prezentujÄ…cych poszczegÃ³lne fazy dziaÅ‚ania programu),
+opis gÅ‚Ã³wnych opcji/trybÃ³w dostÄ™pnych w implementacji oprogramowania (szczegÃ³Å‚owÄ… charakterystykÄ™ opcji naleÅ¼y zamieÅ›ciÄ‡ w dodatku),
+opis problemÃ³w napotkanych w czasie implementacji metody.
+
+
+

@@ -1,0 +1,26 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Gray()]{Gray:2003}
+Nicholas Gray.
+\newblock \emph{ABCs of ADCs, Analog-to-Digital Converter Basics}.
+
+\bibitem[J.(2008)]{PilarMK2}
+Optimum~Sp. J.
+\newblock Odmiany akustycznego systemu wykrywania strza??w i lokalizacji
+  strzelca pilar mk iiw.
+\newblock \emph{Nowa Technika Wojskowa}, 05\penalty0 (5):\penalty0 66--68, Maj
+  2008.
+
+\bibitem[Atm()]{Atmel1}
+\emph{AT91SAM9260 - AT91 ARM Thumb Microcontrollers}.
+
+\bibitem[Ana()]{Analog1}
+\emph{SSM2166 Microphone Preamplifier with Variable Compression and Noise
+  Gating}.
+
+\end{thebibliography}

@@ -1,0 +1,44 @@
+\contentsline {chapter}{Oœwiadczenie}{i}{dummy.2}
+\vspace {1em}
+\contentsline {chapter}{Abstract}{iii}{dummy.3}
+\vspace {1em}
+\contentsline {chapter}{Dedykacja}{iv}{dummy.4}
+\vspace {1em}
+\contentsline {chapter}{Lista Figur}{vii}{dummy.6}
+\contentsline {chapter}{Lista Tabel}{viii}{dummy.8}
+\contentsline {chapter}{Skróty}{ix}{dummy.10}
+\contentsline {chapter}{Nomenklatura}{x}{dummy.13}
+\vspace {2em}
+\contentsline {chapter}{\numberline {1}Wstêp}{1}{chapter.16}
+\contentsline {section}{\numberline {1.1}Temat}{1}{section.17}
+\contentsline {section}{\numberline {1.2}Motywacja i cel pracy}{1}{section.18}
+\contentsline {section}{\numberline {1.3}Zakres pracy}{2}{section.19}
+\contentsline {chapter}{\numberline {2}Omówienie stanu wiedzy oraz istniej¹cych rozwi¹zañ}{4}{chapter.20}
+\contentsline {section}{\numberline {2.1}Etapy akwizycji danych}{5}{section.21}
+\contentsline {subsection}{\numberline {2.1.1}Mikrofon}{5}{subsection.22}
+\contentsline {subsection}{\numberline {2.1.2}Charakterystyka sygna³u akustycznego}{5}{subsection.23}
+\contentsline {subsection}{\numberline {2.1.3}Sygna³ akustyczny w postaci cyfrowej}{6}{subsection.24}
+\contentsline {subsection}{\numberline {2.1.4}Konwersja analogowo-cyfrowa}{6}{subsection.25}
+\contentsline {section}{\numberline {2.2}Okienkowanie sygna³u}{7}{section.27}
+\contentsline {subsection}{\numberline {2.2.1}Ograniczony okres okreœlonoœci sygna³u}{7}{subsection.28}
+\contentsline {subsection}{\numberline {2.2.2}Przeciek widmowy}{8}{subsection.30}
+\contentsline {subsection}{\numberline {2.2.3}Zastosowanie funkcji okna}{9}{subsection.31}
+\contentsline {section}{\numberline {2.3}Time Difference of Arrival}{11}{section.34}
+\contentsline {subsection}{\numberline {2.3.1}Korelacja sygna³ów, jako sposób na wykrycie opóŸnieñ}{12}{subsection.35}
+\contentsline {section}{\numberline {2.4}Pilar MK II}{14}{section.41}
+\contentsline {chapter}{\numberline {3}Implementacja systemu lokalizacji}{16}{chapter.42}
+\contentsline {section}{\numberline {3.1}Opis œrodowiska}{16}{section.43}
+\contentsline {section}{\numberline {3.2}Implementacja systemu}{16}{section.44}
+\contentsline {subsection}{\numberline {3.2.1}Implementacja sprzêtowa}{16}{subsection.45}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Mikrofony oraz przedwzmacniacze}{17}{subsubsection.46}
+\contentsline {subsection}{\numberline {3.2.2}Implementacja programowa}{17}{subsection.48}
+\contentsline {subsection}{\numberline {3.2.3}Format danych wejÅ›ciowych oraz wyjÅ›ciowych}{18}{subsection.49}
+\contentsline {section}{\numberline {3.3}Opis implementacji metody}{18}{section.50}
+\contentsline {chapter}{\numberline {4}Badania i testy}{19}{chapter.51}
+\contentsline {section}{\numberline {4.1}Opis procedury testowej}{19}{section.52}
+\contentsline {section}{\numberline {4.2}Prezentacja rezultatÃ³w}{19}{section.53}
+\contentsline {section}{\numberline {4.3}Wnioski}{20}{section.54}
+\vspace {2em}
+\contentsline {chapter}{\numberline {A}Appendix Title Here}{22}{appendix.57}
+\vspace {2em}
+\contentsline {chapter}{Bibliografia}{23}{dummy.58}
